@@ -360,7 +360,13 @@
             <!-- .navbar-default -->
         </header>
         <!-- End header -->
+        <main class="app-layout-content">
 
+            <!-- Page Content -->
+            <div class="container-fluid p-y-md">
+                @yield('content')
+            </div>
+        </main>
 
 
 
