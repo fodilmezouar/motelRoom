@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.backMaster');
+    return view('welcome');
 });
-
+Route::get('/dashboard', function () {
+    return view('layouts.master');
+});
+Route::get('/reservation/reserver', function () {
+    return view('reservation.reserver');
+});
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
