@@ -7,6 +7,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Document title -->
     <title>Pages &ndash; Blank | AppUI</title>
@@ -70,6 +71,15 @@
                                 <li>
                                     <a href="{{url('reservation/liste')}}">Liste des Réservations</a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item nav-item-has-subnav active open">
+                            <a href="javascript:void(0)"><i class="ion-ios-browsers-outline"></i> Chambres</a>
+                            <ul class="nav nav-subnav">
+                                <li class="active">
+                                    <a href="{{url('gestionChambres')}}">Gestion chambres</a>
+                                </li>
+
                             </ul>
                         </li>
 

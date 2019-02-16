@@ -14,9 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('layouts.master');
+
+Route::get('/gestionChambres', function () {
+    return view('chambres.chambres');
 });
+Route::get('getRoom','RoomController@getRoom');
+Route::post('createRoom','RoomController@createRoom');
+Route::post('deleteRoom','RoomController@deleteRoom');
+Route::post('editRoom/{id}','RoomController@editRoom');
+Route::get('getInformationRoom/{id}','RoomController@getRom');
+
 Route::get('/reservation/reserver', function () {
     return view('reservation.reserver');
 });

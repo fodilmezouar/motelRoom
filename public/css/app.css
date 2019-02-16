@@ -2926,5 +2926,15 @@ div.tagsinput span.tag a:hover {
 .placeholder {
 	color: #aaa;
 }
+.panel > .panel-heading {
+	background-image: none;
+	background-color: #7dc855;
+	color: white;
+
+}
+.panel-primary{
+	border-color: #7dc855;
+}
+
 
 /*# sourceMappingURL=maps/app.css.map */
