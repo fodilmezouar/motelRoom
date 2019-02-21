@@ -22,7 +22,8 @@
 
     <!-- Google fonts -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,900%7CRoboto+Slab:300,400%7CRoboto+Mono:400" />
-
+    <!-- Page JS Plugins CSS -->
+        <link rel="stylesheet" href="{{asset('js/plugins/datatables/jquery.dataTables.min.css')}}" />
     <!-- AppUI CSS stylesheets -->
     <link rel="stylesheet" id="css-font-awesome" href="{{asset('css/font-awesome.css')}}" />
     <link rel="stylesheet" id="css-ionicons" href="{{asset('css/ionicons.css')}}" />

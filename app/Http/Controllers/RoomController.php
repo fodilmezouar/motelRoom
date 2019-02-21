@@ -8,6 +8,7 @@ use App\Chambres;
 class RoomController extends Controller
 {
 
+   
     public function getRoom(){
         $output = array('data' => array());
         $rooms = Chambres::all();

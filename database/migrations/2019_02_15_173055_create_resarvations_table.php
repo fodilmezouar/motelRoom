@@ -13,12 +13,13 @@ class CreateResarvationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('resarvations', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned();
             $table->dateTime('date_reservation');
             $table->dateTime('date_liberation');
             $table->bigInteger('total');
+            $table->integer('isLibi');
             $table-> foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
         });
