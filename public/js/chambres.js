@@ -34,10 +34,20 @@ $(function () {
 
     var manageMat = $("#tableRoom").DataTable({
         searching: true,
-
         dom:
+            "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+        renderer: 'bootstrap',
+        oLanguage: {
+            sLengthMenu: "_MENU_",
+            sInfo: "Showing <strong>_START_</strong>-<strong>_END_</strong> of <strong>_TOTAL_</strong>",
+            oPaginate: {
+                sPrevious: '<i class="ion-ios-arrow-left"></i>',
+                sNext: '<i class="ion-ios-arrow-right"></i>'
+            }
+        },
+
         destroy: true,
         'ajax': 'getRoom',
         'order': []

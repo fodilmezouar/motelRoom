@@ -8,7 +8,7 @@ use App\Chambres;
 class RoomController extends Controller
 {
 
-   
+
     public function getRoom(){
         $output = array('data' => array());
         $rooms = Chambres::all();
@@ -23,7 +23,7 @@ class RoomController extends Controller
                         <li><a type="button" data-toggle="modal" id="editMaterielsModalBtn" data-target="#editMaterielsModal" onclick="editMat('.$room->id.');"> <i class="ion-edit"></i> Editer</a></li>
                        <li><a type="button" data-toggle="modal" data-target="#removeMatModal" id="removeMaterielsModalBtn" onclick="removeMat('.$room->id.');"> <i class="ion-trash-a"></i> Supprimer</a></li>';
 
-            if($room->etat=="Occupé"){
+            if($room->state==1){
                 $button_Action=$button_Action.'<li><a type="button" data-toggle="modal" data-target="#affecterMatModal" id="affecterMaterielsModalBtn" onclick="affecterMat('.$room->id.');"> <i class="fa fa-external-link"></i> Libérer</a></li>          
                      </ul>
                  </div>';
@@ -31,12 +31,25 @@ class RoomController extends Controller
             else{
                 $button_Action=$button_Action.'</ul></div>';
             }
+            $etatRoom=null;
+            switch ($room->state){
+                case "1":
+                    $etatRoom ="Occupé";
+                    break;
+                case "2":
+                    $etatRoom ="Problem";
+                    break;
+                default:
+                    $etatRoom ="Libre";
+                    break;
+
+            }
             $output['data'][] = array(
                 $room->numero,
                 $room->etage,
                 $room->lits,
                 $room->prix,
-                $room->state,
+                $etatRoom,
                 $button_Action
             );
         }
@@ -48,7 +61,7 @@ class RoomController extends Controller
         $Chambre->numero = strtoupper($request->input('RefRoom'));
         $Chambre->prix = $request->input('prix');
         $Chambre->etage = $request->input('etage');
-        $Chambre->state = "Libre";
+        $Chambre->state = 0;
         $Chambre->save();
         $valid['success'] = array('success' => false, 'messages' => array());
         $valid['success'] = true;

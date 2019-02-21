@@ -175,6 +175,7 @@
 
     <!-- Page JS Plugins -->
     <script src="{{asset('js/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/pages/base_tables_datatables.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/chambres.js')}}"></script>
     <!-- Page JS Code -->
 
