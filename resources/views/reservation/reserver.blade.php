@@ -240,7 +240,7 @@
                                 <div class="card">
                                     <ul class="nav nav-tabs" data-toggle="tabs">
                                         <li class="active">
-                                            <a href="#btabs-static-home">Infos Client</a>
+                                            <a href="#infosClientModal">Infos Client</a>
                                         </li>
                                         <li>
                                             <a href="#btabs-static-profile">Infos Réservation</a>
@@ -314,6 +314,7 @@
 @endsection
 @section('scripts')
     <!-- Page JS Plugins -->
+    
     <script src="{{asset('js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <!-- Page JS Plugins -->
     <script src="{{asset('js/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
@@ -321,7 +322,7 @@
 
     <!-- Page JS Code -->
     <script src="{{asset('js/pages/base_forms_wizard.js')}}"></script>
-    <script src="{{asset('js/app-custom.js')}}"></script>
+
     <script>
         $(function()
         {
