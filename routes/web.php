@@ -31,5 +31,6 @@ Route::post('/reservation/client/store','ClientController@store');
 Route::post('/reservation/storeReservation','ReserverController@store');
 Route::post('/reservation/liberer','ReserverController@liberer');
 //
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('parametre','ParametreController@create');
+Route::post('parametre','ParametreController@store');
