@@ -61,14 +61,14 @@
                                                 <th></th>
                                                 <th>Etage</th>
                                                 <th>Numero</th>
+                                                <th>Prix</th>
                                                 <th>Etat</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-            <input type="hidden" id="prix" value="{{$rooms->get(0)->prix}}">
             @foreach($rooms as $room)
 
-            <tr id="{{$room->id}}">
+            <tr id="{{$room->id}}" class="rooms">
                  <td class="text-center">
                             <label class="css-input css-checkbox css-checkbox-default">
                                 <input type="checkbox" class="cocherChambre"><span></span>
@@ -82,6 +82,7 @@
                      @endif
                  </td>  
                  <td class="hidden-xs font-500">{{$room->numero}}</td>
+                 <td class="hidden-xs font-500 prixRoom">{{$room->prix}}</td>
                  @if($room->state)
                     <td class="hidden-xs font-500">Occupée</td> 
                  @else
@@ -168,8 +169,13 @@
                                 </div>
                                 <div class="card-block">
                                     <form class="form-horizontal m-t-sm" action="base_forms_elements_modern.html" method="post" onsubmit="return false;">
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-7">
+                                                <input class="form-control" id="duree" type="text" id="sejour" name="example-nf-email" placeholder="Entrez La durée" onchange="calcDuree()">
+                                            </div>
+                                            </div>
                                         <div class="input-daterange input-group" data-date-format="mm/dd/yyyy">
-                                            <input class="form-control" type="text" id="arr" name="example-daterange1" placeholder="Date D'arrivée" onchange="calculTotal()">
+                                            <input class="form-control" type="text" id="arr" name="example-daterange1" placeholder="Date D'arrivée" onchange="calculTotal();calcDuree()">
                                             <span class="input-group-addon"><i class="ion-chevron-right"></i></span>
                                             <input class="form-control" type="text" id="sor" name="example-daterange2" placeholder="Date De Sortie" onchange="calculTotal()">
                                         </div>
