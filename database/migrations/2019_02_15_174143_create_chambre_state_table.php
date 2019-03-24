@@ -15,10 +15,12 @@ class CreateChambreStateTable extends Migration
     {
         Schema::create('chambre_states', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chambre_id')->unsigned();
-            $table->integer('reservation_id')->unsigned();
-            $table-> foreign('chambre_id')->references('id')->on('chambre')->onDelete('cascade');
-            $table-> foreign('reservation_id')->references('id')->on('reservation')->onDelete('cascade');
+            $table->integer('chambre_id')->unsigned()->nullable();
+            $table->integer('reservation_id')->unsigned()->nullable();
+            $table->integer('client_id')->unsigned()->nullable();
+            $table-> foreign('chambre_id')->references('id')->on('chambres');
+            $table-> foreign('reservation_id')->references('id')->on('reservations');
+            $table-> foreign('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
     }

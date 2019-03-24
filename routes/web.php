@@ -30,6 +30,8 @@ Route::get('/reservation/liste','ReserverController@listeRes');
 Route::post('/reservation/client/store','ClientController@store');
 Route::post('/reservation/storeReservation','ReserverController@store');
 Route::post('/reservation/liberer','ReserverController@liberer');
+Route::post('/reservation/payer','ReserverController@payer');
+
 //
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('parametre','ParametreController@create');

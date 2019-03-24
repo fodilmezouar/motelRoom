@@ -16,24 +16,28 @@
                                             <th class="hidden-xs">Date d'arrivée</th>
                                             <th class="hidden-xs w-20">Date de sortie</th>
                                             <th class="hidden-xs w-20">Prix Total</th>
-                                            <th class="text-center" style="width: 10%;">Actions</th>
+                                            <th class="hidden-xs w-20">Prix Payé</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                 @foreach($reservations as $res)
                    <tr>
-                                            <td>{{$res->client->nom}}</td>
-                                            <td class="hidden-xs">{{date_format(date_create($res->date_reservation),"Y-m-d")}}</td>
-                                            <td class="hidden-xs w-20">{{date_format(date_create($res->date_liberation),"Y-m-d")}}</td>
-                                            <td class="hidden-xs w-20">{{$res->total}} DA</td>
+                                            <td>{{$res->client->nom}} {{$res->client->prenom}}</td>
+                                            <td>{{date_format(date_create($res->date_reservation),"Y-m-d")}}</td>
+                                            <td>{{date_format(date_create($res->date_liberation),"Y-m-d")}}</td>
+                                            <td>{{$res->total}} DA</td>
+                                            <td>{{$res->prixPaye}} DA</td>
                                             <td>
             <div class="btn-group">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Action <span class="caret"></span>
                       </button>
                      <ul class="dropdown-menu">
-                        <li><a type="button" data-toggle="modal" id="{{$res->id}}" data-target="#modalFin" class="finRes"> <i class="ion-edit"></i> Fin réservation</a></li>
-                       <li><a type="button" data-toggle="modal" data-target="#removeMatModal" id="removeMaterielsModalBtn"> <i class="ion-trash-a"></i> Supprimer</a></li>
+                        @if($res->prixPaye < $res->total)
+                        <li><a type="button" data-toggle="modal" data-target="#payementModal" id="{{$res->id}}" class="montantClass"><i class="fa fa-money fa-1x"></i> Payer</a></li>
+                        @endif
+                        <li><a type="button" data-toggle="modal" id="{{$res->id}}" data-target="#modalFin" class="finRes"><i class="fa fa-clock-o fa-1x"></i> Libérer</a></li>
                    </ul>
             </div>
                                             </td>
@@ -46,6 +50,38 @@
                         </div>
                         <!-- .card -->
                         <!-- End Dynamic Table Full -->
+                        <!-- Top Modal -->
+                    <div class="modal fade" id="payementModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-top modal-md">
+                            <div class="modal-content">
+                                <div class="card-header bg-green bg-inverse">
+                                    <h4>Montant Payé</h4>
+                                    <ul class="card-actions">
+                                        <li>
+                                            <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block" id="bodyModal">
+                                    <!-- Card Tabs Default Style -->
+                                <div class="card">
+                                    <div class="card-block">
+                                         <div class="form-group">
+                                                <label for="example-nf-email">Montant Payé</label>
+                                                <input class="form-control" type="email" id="montantPaye" name="example-nf-email" placeholder="Enter Price...">
+                                            </div>
+                                    </div>
+                                </div>
+                                <!-- End Card Tabs Default Style -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-sm btn-app" type="button" id="validerMontant"><i class="ion-checkmark"></i> Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Top Modal -->
                         <!-- remove brand -->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFin">
         <div class="modal-dialog">
