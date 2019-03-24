@@ -17,7 +17,6 @@ class ReserverController extends Controller
     public function store(Request $request){
       //add reservation
       $reservation = new Reservation();
-      $reservation->client_id = "0";
       $reservation->date_reservation = date_format(date_create($request->input('arr')),"Y-m-d");
       $reservation->date_liberation = date_format(date_create($request->input('sor')),"Y-m-d");
       $reservation->total = $request->input('total');
