@@ -7,6 +7,7 @@ use App\Chambres;
 use App\Reservation;
 use App\Client;
 use App\Chambre_state;
+use Illuminate\Support\Facades\DB;
 class ReserverController extends Controller
 {
     public function reservation(){
@@ -16,12 +17,7 @@ class ReserverController extends Controller
     }
     public function store(Request $request){
       //add reservation
-      $reservation = new Reservation();
-      $reservation->date_reservation = date_format(date_create($request->input('arr')),"Y-m-d");
-      $reservation->date_liberation = date_format(date_create($request->input('sor')),"Y-m-d");
-      $reservation->total = $request->input('total');
-      $reservation->isLibi = 0;
-      $reservation->save();
+      $maxId = DB::table('reservations')->select([DB::raw('MAX(id) AS id')])->get()->first()->id;
       //clients
       $cls = $request->input('clients');
       $clientId = "";
@@ -53,9 +49,14 @@ class ReserverController extends Controller
 
          $stay->client_id = $client->id;
          $stay->chambre_id = $idChambre;
-         $stay->reservation_id = $reservation->id;
+         $stay->reservation_id = $maxId + 1;
          $stay->save();
       }
+      $reservation = new Reservation();
+      $reservation->date_reservation = date_format(date_create($request->input('arr')),"Y-m-d");
+      $reservation->date_liberation = date_format(date_create($request->input('sor')),"Y-m-d");
+      $reservation->total = $request->input('total');
+      $reservation->isLibi = 0;
       $reservation->client_id = $clientId;
     	$reservation->save();
     	
