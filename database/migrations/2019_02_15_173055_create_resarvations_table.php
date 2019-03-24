@@ -19,6 +19,7 @@ class CreateResarvationsTable extends Migration
             $table->dateTime('date_reservation');
             $table->dateTime('date_liberation');
             $table->bigInteger('total');
+            $table->bigInteger('prixPaye')->nullable()->default(0);
             $table->integer('isLibi');
             $table-> foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
