@@ -2,6 +2,22 @@
      var idChambres = [];
      var clients = [];
      var cptClients = 0;
+     function calcDuree(){
+        var duree = parseInt($('#duree').val());
+        if(!duree)
+            duree = 0;
+        var start= $("#arr").datepicker("getDate");
+        var end = new Date(start);
+        end.setDate(end.getDate() + duree);
+        var $datepicker = $('#sor');
+        $datepicker.datepicker();
+        $datepicker.datepicker('setDate',new Date(end));
+        console.log(end);
+     }
+     $('.rooms').on('click',function(){
+       $('.rooms').removeClass('active');
+       $('input:checked').prop( "checked", false );
+     });
      $('#clients').on('click','.delete',function(){
       $(this).parent().parent().remove();
       if($('#contentClients').html().trim() == "")
@@ -35,14 +51,16 @@
 
      }
      function calculTotal(){
-        var trChambres = $("tr[class='active']");
+        var trChambres = $("tr[class*='active']");
      var somme = 0;
      var prixChambre =parseInt($('#prix').val());
      for(var i = 0;i< trChambres.length ;i++){
         var tr = trChambres[i];
         idChambres[i] = tr.id;
-        somme+=prixChambre;
+        var pr = parseInt($('#'+tr.id+' .prixRoom').html());
+        somme+=pr;
      }
+
      var arr = $('#arr').val();
      var sor = $('#sor').val();
      var start= $("#arr").datepicker("getDate");
@@ -106,11 +124,11 @@
      $("#submitReservation").on('click', function() {
      var trChambres = $("tr[class='active']");
      var somme = 0;
-     var prixChambre =parseInt($('#prix').val());
+     //var prixChambre =parseInt($('#prix').val());
      for(var i = 0;i< trChambres.length ;i++){
      	var tr = trChambres[i];
      	idChambres[i] = tr.id;
-     	somme+=prixChambre;
+     	//somme+=prixChambre;
      }
      var arr = $('#arr').val();
      var sor = $('#sor').val();
@@ -121,8 +139,7 @@
      $('#arrRecap').html(arr);
      $('#sorRecap').html(sor);
      $('#sejour').html(sejour);
-     alert(somme * sejour);
-     total = somme * sejour;
+     //total = somme * sejour;
      });
      $("#validerRes").on('click',function(){
      	/* store client */
