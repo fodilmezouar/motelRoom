@@ -17,7 +17,6 @@ class ReserverController extends Controller
     }
     public function store(Request $request){
       //add reservation
-      $maxId = DB::table('reservations')->select([DB::raw('MAX(id) AS id')])->get()->first()->id;
       //clients
       $cls = $request->input('clients');
       $clientId = "";
@@ -26,8 +25,9 @@ class ReserverController extends Controller
           $chambre = Chambres::find($idChambre);
           $chambre->state = '1';
           $chambre->save();
+          $idClients = array();
       for ($i=0; $i < sizeof($cls); $i++) { 
-        $stay = new Chambre_state();
+        //$stay = new Chambre_state();
          $client = new Client();
          $client->type = $cls[$i]["typeClient"];
          $client->nom = $cls[$i]["nomCl"];
@@ -46,12 +46,10 @@ class ReserverController extends Controller
          $client->save();
          if($client->type == "1")
            $clientId = $client->id;
-
-         $stay->client_id = $client->id;
-         $stay->chambre_id = $idChambre;
-         $stay->reservation_id = $maxId + 1;
-         $stay->save();
+         $idClients[] = $client->id;
       }
+
+      
       $reservation = new Reservation();
       $reservation->date_reservation = date_format(date_create($request->input('arr')),"Y-m-d");
       $reservation->date_liberation = date_format(date_create($request->input('sor')),"Y-m-d");
@@ -60,6 +58,14 @@ class ReserverController extends Controller
       $reservation->client_id = $clientId;
     	$reservation->save();
     	
+      for ($i=0; $i < sizeof($idClients); $i++) { 
+        $stay = new Chambre_state();
+        $stay->client_id = $client->id;
+         $stay->chambre_id = $idChambre;
+         $stay->reservation_id = $reservation->id;
+         $stay->save();
+      }
+
        $valid['success'] = array('success' => false, 'rep' => array());
         $valid['success'] = true;
         $valid['rep'] = "Success bb";    
