@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('test', function () {
+    return view('reservation.invoice');
 });
 
 Route::get('/gestionChambres', function () {
@@ -31,7 +31,7 @@ Route::post('/reservation/client/store','ClientController@store');
 Route::post('/reservation/storeReservation','ReserverController@store');
 Route::post('/reservation/liberer','ReserverController@liberer');
 Route::post('/reservation/payer','ReserverController@payer');
-
+Route::get('/reservation/print/{id}','ReserverController@print');
 //
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('parametre','ParametreController@create');
