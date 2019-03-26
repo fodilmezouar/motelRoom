@@ -108,11 +108,21 @@ class ReserverController extends Controller
         $valid['rep'] = "Success bb";    
         return response()->json($valid);
     }
+
     public function infosClient($idRes){
          $clients = DB::table('clients')
             ->join('chambre_states', 'clients.id', '=', 'chambre_states.client_id')
             ->where('reservation_id',"=",$idRes)
             ->get();
       return view('reservation.infosClient')->with(['clients'=>$clients]);
+
+    public function print($id){
+        $reservation = Reservation::find($id);
+        $responsable = Client::where('id','=',$reservation->client_id)->get();
+
+        return view('reservation.invoice')->with(['responsable'=>$responsable,'reservation'=>$reservation]);
+
+
+
     }
 }

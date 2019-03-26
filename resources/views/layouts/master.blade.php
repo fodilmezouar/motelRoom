@@ -15,7 +15,6 @@
     <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework" />
     <meta name="author" content="rustheme" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="stylesheet" href="{{asset('js/plugins/datatables/jquery.dataTables.min.css')}}">
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{asset('img/favicons/apple-touch-icon.png')}}" />
     <link rel="icon" href="{{asset('img/favicons/favicon.ico')}}" />
@@ -272,7 +271,6 @@
 <script src="{{asset('js/appT.js')}}"></script>
 <script src="{{asset('js/app-custom.js')}}"></script>
 <script src="{{asset('js/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('js/pages/base_tables_datatables.js')}}"></script>
 @yield('scripts')
 </body>
 
