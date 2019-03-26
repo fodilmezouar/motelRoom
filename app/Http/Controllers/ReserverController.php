@@ -13,7 +13,8 @@ class ReserverController extends Controller
     public function reservation(){
     	//state 1 pour occupé , 0 pour libre
     	$rooms = Chambres::all();
-        return view('reservation.reserver')->with('rooms',$rooms);
+      $clients = Client::all();
+        return view('reservation.reserver')->with(['rooms'=>$rooms,'clients'=>$clients]);
     }
     public function store(Request $request){
       //add reservation
@@ -26,9 +27,13 @@ class ReserverController extends Controller
           $chambre->state = '1';
           $chambre->save();
           $idClients = array();
+          $client = null;
       for ($i=0; $i < sizeof($cls); $i++) { 
         //$stay = new Chambre_state();
-         $client = new Client();
+        if($cls[$i]["isClient"] == "false")
+               $client = new Client();
+        else
+               $client = Client::find($cls[$i]["idCl"]);
          $client->type = $cls[$i]["typeClient"];
          $client->nom = $cls[$i]["nomCl"];
          $client->prenom = $cls[$i]["prenomCl"];
@@ -44,9 +49,10 @@ class ReserverController extends Controller
          $client->numPiece = $cls[$i]["numPiece"];
          $client->datePiece = $cls[$i]["datePiece"];
          $client->save();
+         $idClients[] = $client->id;
          if($client->type == "1")
            $clientId = $client->id;
-         $idClients[] = $client->id;
+         
       }
 
       
@@ -60,7 +66,7 @@ class ReserverController extends Controller
     	
       for ($i=0; $i < sizeof($idClients); $i++) { 
         $stay = new Chambre_state();
-        $stay->client_id = $client->id;
+        $stay->client_id = $idClients[$i];
          $stay->chambre_id = $idChambre;
          $stay->reservation_id = $reservation->id;
          $stay->save();
@@ -101,5 +107,12 @@ class ReserverController extends Controller
         $valid['success'] = true;
         $valid['rep'] = "Success bb";    
         return response()->json($valid);
+    }
+    public function infosClient($idRes){
+         $clients = DB::table('clients')
+            ->join('chambre_states', 'clients.id', '=', 'chambre_states.client_id')
+            ->where('reservation_id',"=",$idRes)
+            ->get();
+      return view('reservation.infosClient')->with(['clients'=>$clients]);
     }
 }

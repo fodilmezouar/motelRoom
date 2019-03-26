@@ -26,9 +26,10 @@ Route::get('getInformationRoom/{id}','RoomController@getRom');
 
 Route::get('/reservation/reserver','ReserverController@reservation');
 Route::get('/reservation/liste','ReserverController@listeRes');
+Route::get('reservation/infos/{idRes}','ReserverController@infosClient');
 
 Route::post('/reservation/client/store','ClientController@store');
-Route::post('/reservation/storeReservation','ReserverController@store');
+Route::get('/reservation/storeReservation','ReserverController@store');
 Route::post('/reservation/liberer','ReserverController@liberer');
 Route::post('/reservation/payer','ReserverController@payer');
 

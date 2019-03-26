@@ -12,6 +12,12 @@ var BaseTableDatatables = function() {
 			pageLength: 10,
 			lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]]
 		});
+		jQuery( '.js-dataTable-full2' ).dataTable({
+			columnDefs: [ { orderable: false, targets: [ 3 ] } ],
+			pageLength: 10,
+			lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]]
+		});
+		jQuery( '.js-dataTable-full3' ).dataTable();
 	};
 
 	// Init simple DataTable: https://www.datatables.net/

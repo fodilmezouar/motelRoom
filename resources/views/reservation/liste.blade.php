@@ -38,6 +38,7 @@
                         <li><a type="button" data-toggle="modal" data-target="#payementModal" id="{{$res->id}}" class="montantClass"><i class="fa fa-money fa-1x"></i> Payer</a></li>
                         @endif
                         <li><a type="button" data-toggle="modal" id="{{$res->id}}" data-target="#modalFin" class="finRes"><i class="fa fa-clock-o fa-1x"></i> Libérer</a></li>
+                        <li><a type="button" id="{{$res->id}}" href="infos/{{$res->id}}"><i class="fa fa-clock-o fa-1x"></i> Infos</a></li>
                    </ul>
             </div>
                                             </td>
@@ -82,25 +83,35 @@
                         </div>
                     </div>
                     <!-- End Top Modal -->
-                        <!-- remove brand -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalFin">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="fa fa-trash-o"></i> Mettre Fin à la réservation</h4>
-                </div>
-                <div class="modal-body" id="body-removeRoom">
-                    <p>Etes vous sur ? avant cà vérifier les clés</p>
-                </div>
-                <div class="modal-footer removeCatFooter">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="ion-ios-trash"></i> Fermer</button>
-                    <button type="button" class="btn btn-primary" id="valFin" data-loading-text="Loading..."> <i class="ion-android-done"></i> Valider</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- /remove brand -->
+                    <!-- Top Modal -->
+                    <div class="modal fade" id="modalFin" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-top modal-md">
+                            <div class="modal-content">
+                                <div class="card-header bg-green bg-inverse">
+                                    <h4>Libération de la chambre</h4>
+                                    <ul class="card-actions">
+                                        <li>
+                                            <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block" id="bodyModal">
+                                    <!-- Card Tabs Default Style -->
+                                <div class="card">
+                                    <div class="card-block">
+                                         Voulez vous mettre fin à la réservation
+                                    </div>
+                                </div>
+                                <!-- End Card Tabs Default Style -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-sm btn-app" type="button" id="valFin"><i class="ion-checkmark"></i> Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Top Modal -->
 @endsection
 @section('scripts')
     <!-- Page JS Plugins -->
