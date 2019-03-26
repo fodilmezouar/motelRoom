@@ -117,7 +117,7 @@
                             <div class="card">
 
                                 <div class="card-header">
-                                   <h4 align="right"><button align="right" class="btn btn-primary" data-toggle="modal" data-target="#modalClients"><i class="fa fa-plus-circle "></i> Ajouter</button></h4>
+                                   <h4 align="right"><button align="right" class="btn btn-primary" data-toggle="modal" data-target="#modalListe"><i class="fa fa-plus-circle "></i> From Liste</button>  <button align="right" class="btn btn-primary" data-toggle="modal" data-target="#modalClients"><i class="fa fa-plus-circle "></i> Ajouter</button></h4>
                                 </div>
 
                                 <div class="card-block">
@@ -132,7 +132,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="contentClients">
-                                        <tr align="center" id="vide"><td colspan="5" id="hih">Table Vide</td></tr>
                                     </tbody>
                                 </table>
                                 </div>
@@ -227,6 +226,62 @@
                     </div>
                     <!-- End Top Modal -->
                     <!-- Top Modal -->
+                    <div class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" id="modalListe">
+                        <div class="modal-dialog modal-dialog-top modal-lg">
+                            <div class="modal-content">
+                                <div class="card-header bg-green bg-inverse">
+                                    <h4>From Liste</h4>
+                                    <ul class="card-actions">
+                                        <li>
+                                            <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block" id="bodyModal">
+                                    <!-- Card Tabs Default Style -->
+                                <div class="card">
+                                    <div class="card-block">
+                                         <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Prenom</th>
+                                            <th>Date de Naissance</th>
+                                            <th>Type</th>
+                                            <th class="hidden-xs w-20">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="listeClient">
+                @foreach($clients as $client)
+                   <tr  id="{{$client->id}}">
+                                            <td>{{$client->nom != null ? $client->nom : 'sans'}} </td>
+                                            <td>{{$client->prenom != null ? $client->prenom : 'sans'}}</td>
+                                            <td>{{$client->naissance != null ? date_format(date_create($client->naissance),"Y-m-d") : 'sans'}}</td>
+                                            <td>
+                                             @if($client->type == '1')
+                                                 {{'Respensable'}}
+                                             @elseif($client->type == '2')
+                                                 {{'Accompagnateur'}}
+                                             @else
+                                                 {{'enfant'}}
+                                             @endif
+                                            </td>
+                                            <td><button align="right" class="btn btn-primary" id="{{$client->id}}" onclick="add('{{$client->type}}','{{$client->nom}}','{{$client->prenom}}','{{$client->pere}}','{{$client->mere}}','{{$client->naissance}}','{{$client->lieu}}','{{$client->adresse}}','{{$client->nationalite}}','{{$client->job}}','{{$client->tel}}','{{$client->typePiece}}','{{$client->numPiece}}','{{$client->datePiece}}','{{$client->id}}')"><i class="fa fa-plus-circle addClient"></i></button></td>
+                @endforeach
+               </tbody>
+           </table>
+                                    </div>
+                                </div>
+                                <!-- End Card Tabs Default Style -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Top Modal -->
+                    <!-- Top Modal -->
                     <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-top modal-md">
                             <div class="modal-content">
@@ -259,6 +314,173 @@
                     </div>
                     <!-- End Top Modal -->
                     <!-- Top Modal -->
+                    <div class="modal fade" id="modalClientsEdit" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-top modal-lg">
+                            <div class="modal-content">
+                                <div class="card-header bg-green bg-inverse">
+                                    <h4>Informations Clients</h4>
+                                    <ul class="card-actions">
+                                        <li>
+                                            <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-block" id="bodyModal">
+                                    <!-- Card Tabs Default Style -->
+                                <div class="card">
+                                    <ul class="nav nav-tabs" data-toggle="tabs">
+                                        <li class="active">
+                                            <a href="#infosClientEdit">Infos Client</a>
+                                        </li>
+                                        <li>
+                                            <a href="#infosCarteEdit" id="lienCarteEdit">Infos Carte</a>
+                                        </li>
+                                    </ul>
+                                    <form id="formInfosEdit">
+                                    <div class="card-block tab-content">
+                                        <div class="tab-pane active" id="infosClientEdit">
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <div class="form-material floating">
+                                                        <select class="form-control" id="typeClientEdit" name="material-select2" size="1" onchange="hideThingsEdit();">
+                                        <option value="1">Respensable</option>
+                                        <option value="2">Accompagnateur</option>
+                                        <option value="3">Enfant</option>
+                                    </select>
+                                                        <label for="material-select2">Select</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Nom</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="nomClEdit" name="material-text2" placeholder="Enter nom ...">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Prenom</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="prenomClEdit" name="material-text2" placeholder="Enter prenom ...">
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="peremereEdit">
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Fils de</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="pereEdit" name="material-text2" placeholder="Enter pere ...">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Et de</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="mereEdit" name="material-text2" placeholder="Enter mere ...">
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Date de naissance</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="date" id="naissanceClEdit" name="example-datepicker4">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6" id="lieuHideEdit">
+                                                <label class="col-sm-12" for="example-email-input">Lieu</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="lieuClEdit" name="material-gridl2" placeholder="Enter lieu de naissance ...">
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6" id="natHideEdit">
+                                                <label class="col-sm-12" for="example-email-input">Nationalité</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="natClEdit" name="material-gridl2" placeholder="Enter nationalité ...">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6" id="jobHideEdit">
+                                                <label class="col-sm-12" for="example-email-input">Profession</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="tel" id="jobClEdit" name="material-email2" placeholder="Enter profession ...">
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6" id="telHideEdit">
+                                                <label class="col-sm-12" for="example-email-input">Numéro de tel</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="tel" id="telClEdit" name="material-email2" placeholder="Enter Tel number">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6" id="addressHideEdit">
+                                                <label class="col-sm-12" for="example-email-input">Adresse</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="tel" id="adresseClEdit" name="material-email2" placeholder="Enter Adresse">
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="tab-pane" id="infosCarteEdit">
+
+                                           <!-- <div class="b-b m-b-md">
+                                              <h2>Les Dates :</h2>
+                                        </div>!-->
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <div class="form-material floating">
+                                                        <select class="form-control" id="pieceEdit" name="material-select2" size="1">
+                                        <option value="1">Carte</option>
+                                        <option value="2">Permis</option>
+                                    </select>
+                                                        <label for="material-select2">Select</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Numéro</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" id="numPieceEdit" name="numPiece" placeholder="Enter num piece ...">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Fait le</label>
+                                                <div class="col-sm-12">
+                                                   <input class="form-control" type="date" id="datePieceEdit" name="example-datepicker4">
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                                <!-- End Card Tabs Default Style -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-sm btn-app" type="button" id="validerInfosClientEdit"><i class="ion-checkmark"></i> Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Top Modal -->
+            <!-- Top Modal -->
                     <div class="modal fade" id="modalClients" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-top modal-lg">
                             <div class="modal-content">
@@ -281,6 +503,7 @@
                                             <a href="#infosCarte" id="lienCarte">Infos Carte</a>
                                         </li>
                                     </ul>
+                                    <form id="formInfos">
                                     <div class="card-block tab-content">
                                         <div class="tab-pane active" id="infosClient">
                                         <div class="form-group">
@@ -296,79 +519,85 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-xs-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="text" id="nomCl" name="material-text2">
-                                                    <label for="material-text2">Nom</label>
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Nom</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="nomCl" name="material-text2" placeholder="Enter nom ...">
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="text" id="prenomCl" name="material-text2">
-                                                    <label for="material-text2">Prénom</label>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Prenom</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="prenomCl" name="material-text2" placeholder="Enter prenom ...">
                                                 </div>
+                                              </div>
                                             </div>
                                         </div>
                                         <div class="form-group" id="peremere">
-                                            <div class="col-xs-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="text" id="pere" name="material-text2">
-                                                    <label for="material-text2">Fils de</label>
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Fils de</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="pere" name="material-text2" placeholder="Enter pere ...">
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="text" id="mere" name="material-text2">
-                                                    <label for="material-text2">Et de</label>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Et de</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="mere" name="material-text2" placeholder="Enter mere ...">
                                                 </div>
+                                              </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-sm-6">
-                                                <div class="form-material">
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Date de naissance</label>
+                                                <div class="col-sm-12">
                                                     <input class="form-control" type="date" id="naissanceCl" name="example-datepicker4">
-                                                    <label for="example-datepicker4">Date de Naissance</label>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6" id="lieuHide">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="text" id="lieuCl" name="material-gridl2">
-                                                    <label for="material-gridl2">Lieu</label>
+                                              </div>
+                                              <div class="col-sm-6" id="lieuHide">
+                                                <label class="col-sm-12" for="example-email-input">Lieu</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="lieuCl" name="material-gridl2" placeholder="Enter lieu de naissance ...">
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="form-group" id="natHide">
-                                            <div class="col-sm-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="text" id="natCl" name="material-gridl2">
-                                                    <label for="material-gridl2">Nationalité</label>
-                                                </div>
+                                              </div>
                                             </div>
                                         </div>
-                                        <div class="form-group" id="jobHide">
-                                            <div class="col-sm-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="tel" id="jobCl" name="material-email2">
-                                                    <label for="material-email2">Profession</label>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6" id="natHide">
+                                                <label class="col-sm-12" for="example-email-input">Nationalité</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="text" id="natCl" name="material-gridl2" placeholder="Enter nationalité ...">
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" type="tel" id="telCl" name="material-email2">
-                                                    <label for="material-email2">Numero Tel</label>
+                                              </div>
+                                              <div class="col-sm-6" id="jobHide">
+                                                <label class="col-sm-12" for="example-email-input">Profession</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="tel" id="jobCl" name="material-email2" placeholder="Enter profession ...">
                                                 </div>
+                                              </div>
                                             </div>
                                         </div>
-                                    <div class="form-group" id="addressHide">
-                                        <div class="col-sm-8">
-                                                <div class="form-material floating">
-                                                    <textarea class="form-control" id="adresseCl" name="material-textarea-small" rows="2"></textarea>
-                                                    <label for="example-datepicker4">Adresse</label>
+                                        <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-sm-6" id="telHide">
+                                                <label class="col-sm-12" for="example-email-input">Numéro de tel</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="tel" id="telCl" name="material-email2" placeholder="Enter Tel number">
                                                 </div>
+                                              </div>
+                                              <div class="col-sm-6" id="addressHide">
+                                                <label class="col-sm-12" for="example-email-input">Adresse</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" type="tel" id="adresseCl" name="material-email2" placeholder="Enter Adresse">
+                                                </div>
+                                              </div>
                                             </div>
-                                   </div>
+                                        </div>
                                         </div>
                                         <div class="tab-pane" id="infosCarte">
 
@@ -387,23 +616,26 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-sm-6">
-                                                <div class="form-material floating">
-                                                    <input class="form-control" id="numPiece" name="numPiece">
-                                                    <label for="material-email2">Numéro</label>
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Numéro</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" id="numPiece" name="numPiece" placeholder="Enter num piece ...">
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-material">
-                                                    <input class="form-control" type="date" id="datePiece" name="example-datepicker4">
-                                                    <label for="example-datepicker4">Fait Le</label>
+                                              </div>
+                                              <div class="col-sm-6">
+                                                <label class="col-sm-12" for="example-email-input">Fait le</label>
+                                                <div class="col-sm-12">
+                                                   <input class="form-control" type="date" id="datePiece" name="example-datepicker4">
                                                 </div>
+                                              </div>
                                             </div>
                                         </div>
                                         <div>
                                         </div>
                                         </div>
                                     </div>
+                                </form>
                                 </div>
                                 <!-- End Card Tabs Default Style -->
                                 </div>
