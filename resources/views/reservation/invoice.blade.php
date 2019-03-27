@@ -1,32 +1,75 @@
-@extends('layouts.master')
-@section('content')
+<!DOCTYPE html>
+
+<html class="app-ui">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Document title -->
+    <title>Pages &ndash; Blank | AppUI</title>
+
+    <meta name="description" content="AppUI - Admin Dashboard Template & UI Framework" />
+    <meta name="author" content="rustheme" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{{asset('img/favicons/apple-touch-icon.png')}}" />
+    <link rel="icon" href="{{asset('img/favicons/favicon.ico')}}" />
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,900%7CRoboto+Slab:300,400%7CRoboto+Mono:400" />
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{asset('js/plugins/datatables/jquery.dataTables.min.css')}}" />
+    <!-- AppUI CSS stylesheets -->
+    <link rel="stylesheet" id="css-font-awesome" href="{{asset('css/font-awesome.css')}}" />
+    <link rel="stylesheet" id="css-ionicons" href="{{asset('css/ionicons.css')}}" />
+    <link rel="stylesheet" id="css-bootstrap" href="{{asset('css/bootstrap.css')}}" />
+    <link rel="stylesheet" id="css-app" href="{{asset('css/app.css')}}" />
+    <link rel="stylesheet" id="css-app-custom" href="{{asset('css/app-custom.css')}}" />
+    <!-- End Stylesheets -->
+</head>
+<body>
     <style>
         td{
             font-size: 12px;
 
         }
+        table td:nth-child(2){
+            font: oblique bold 12px "Apple Braille", sans-serif;
+        }
+        @media print {
+            @page { margin: 0; }
+        }
     </style>
-    <button class="btn btn-app-blue hidden-print" type="button" onclick="window.print();"><i class="ion-printer m-r-xs"></i> Print Invoice</button>
-    <div class="card">
-        <div class="card-header">
-            <div class="h2 text-uppercase text-center">Hotel SAIM</div>
+    <div class="card" id="card" >
+
+        <button class="btn btn-app-blue hidden-print center-block mx-md-0" type="button" onclick="window.print();"><i class="ion-printer m-r-xs"></i> Print Invoice</button>
+
+        <div class="card-header" style="border: 1px solid">
+            <div id="logo" class="drawer-header">
+                <img class="img-responsive" src="{{asset($parametre->logo)}}" width="100px"  />
+            </div>
+            <div class="h3 text-uppercase text-center">{{ strtoupper($parametre->nom) }}</div>
         </div>
-        <div class="pull-right">
+        <div class="card-block  pull-right">
             <address>
-                Address<br>
-                <i class="ion-ios-telephone-outline"></i> (000) 000-0000
+                {{$parametre->adresse}}<br>
+                <i class="ion-ios-telephone-outline"></i>{{$parametre->numtel}}
             </address>
         </div>
-        <div class="card-block pull-left">
+        <div class="card-block pull-center">
             <!-- Invoice Info -->
             <div class="h5 text-uppercase text-center text-blue">FICHE VOYAGEUR</div>
-            <div class="h6 text-uppercase text-center text-danger">Chambre: N01</div>
+            <div class="h6 text-uppercase text-center text-danger">Chambre: N°{{$chambre->etage}}{{$chambre->numero}}</div>
             <!-- End Client Info -->
             </div>
     @foreach($responsable as $res)
         <!-- End Invoice Info -->
-        <div class="container">
-        <div class="table-responsive container text-sm-center">
+        <div class="container card-block">
+        <div class="table-responsive container text-sm-center" style="border: 1px solid">
             <table class="table table-condensed table-borderless">
 
                 <tr>
@@ -62,8 +105,14 @@
             <div class="h7  text-sm-center text-danger">Nombre d'enfants de moins de 15 ans : <strong>3</strong></div>
             <div class="h4 text-uppercase text-center text-blue">بطاقة التعريف المقدمة</div>
             <div class="h4 text-uppercase text-center text-blue">Piece d'identité </div>
-            <div class="table-responsive container text-sm-center">
+            <div class="table-responsive container text-sm-center" style="border: 1px solid">
                 <?php
+
+                    $dateRese = date('Y-m-d', strtotime($reservation->date_reservation));
+                    $dateSortie = date('Y-m-d', strtotime($reservation->date_liberation));
+                    $earlier = new DateTime($dateRese);
+                    $later = new DateTime($dateSortie);
+                    $diff = $later->diff($earlier)->format("%a");
                     $type="";
                 if ($res->typePiece == 1)
                     $type="carte";
@@ -73,7 +122,7 @@
                     $type="Passport";
 
                 ?>
-                <table class="table table-condensed table-borderless">
+                <table class="table table-condensed table-borderless" >
                     <tr>
                         <td>Nature</td><td>{{$type}}</td><td>:النوع</td>
                     </tr>
@@ -87,28 +136,21 @@
                         <td>A</td><td>{{$res->lieu}}</td><td>: ب</td>
                     </tr>
                     <tr>
-                        <td>Arrivée</td><td>{{$reservation->date_reservation}}</td><td>:صادرة بالتاريخ</td>
+                        <td>Arrivée</td><td>{{$dateRese}}</td><td>:الوصول</td>
                     </tr>
                     <tr>
-                        <td>Durée du séjour</td><td>{{$reservation->date_liberation}}</td><td>: مدة الاقامة</td>
+                        <td>Durée du séjour</td><td>{{$diff}}</td><td>: مدة الاقامة</td>
                     </tr>
                     <tr>
-                        <td>Marsa Ben M'hidi le</td><td></td><td>:مرسي بن مهيدي</td>
+                        <td>Marsa Ben M'hidi le</td><td>{{date('Y-M-d')}}</td><td>:مرسي بن مهيدي</td>
                     </tr>
-
                 </table>
             </div>
+
+                <div class="card-block pull-right">الامضاء</div>
+                <div class="card-block pull-left">signature</div>
         </div>
     @endforeach
 
 
-
-    <!-- Footer -->
-            <!-- End Footer -->
-        </div>
-    </div>
-@endsection
-@section('scripts')
-    <!-- Page JS Plugins -->
-    <script src="{{asset('js/print.min.js')}}"></script>
-@endsection
+</body>

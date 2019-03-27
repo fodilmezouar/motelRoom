@@ -38,7 +38,8 @@
                         <li><a type="button" data-toggle="modal" data-target="#payementModal" id="{{$res->id}}" class="montantClass"><i class="fa fa-money fa-1x"></i> Payer</a></li>
                         @endif
                         <li><a type="button" data-toggle="modal" id="{{$res->id}}" data-target="#modalFin" class="finRes"><i class="fa fa-clock-o fa-1x"></i> Libérer</a></li>
-                        <li><a type="button" id="{{$res->id}}" href="infos/{{$res->id}}"><i class="fa fa-clock-o fa-1x"></i> Infos</a></li>
+                        <li><a type="button" id="{{$res->id}}" href="infos/{{$res->id}}"><i class="fa fa-info-circle fa-1x"></i> Infos</a></li>
+                            <li><a type="button" id="{{$res->id}}" href="print/{{$res->id}}"><i class="ion-printer fa-1x"></i> imprimer</a></li>
                    </ul>
             </div>
                                             </td>

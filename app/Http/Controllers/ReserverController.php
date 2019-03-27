@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Parametre;
 use Illuminate\Http\Request;
 use App\Chambres;
 use App\Reservation;
@@ -109,18 +110,23 @@ class ReserverController extends Controller
         return response()->json($valid);
     }
 
-    public function infosClient($idRes){
-         $clients = DB::table('clients')
+    public function infosClient($idRes)
+    {
+        $clients = DB::table('clients')
             ->join('chambre_states', 'clients.id', '=', 'chambre_states.client_id')
-            ->where('reservation_id',"=",$idRes)
+            ->where('reservation_id', "=", $idRes)
             ->get();
-      return view('reservation.infosClient')->with(['clients'=>$clients]);
+        return view('reservation.infosClient')->with(['clients' => $clients]);
+    }
 
     public function print($id){
         $reservation = Reservation::find($id);
         $responsable = Client::where('id','=',$reservation->client_id)->get();
+        $idChambre = Chambre_state::where('reservation_id','=',$id)->get()->first()->chambre_id;
+        $chambre = Chambres::find($idChambre);
+        $parametre =Parametre::find(1);
 
-        return view('reservation.invoice')->with(['responsable'=>$responsable,'reservation'=>$reservation]);
+        return view('reservation.invoice')->with(['responsable'=>$responsable,'reservation'=>$reservation,'parametre'=>$parametre,'chambre'=>$chambre]);
 
 
 

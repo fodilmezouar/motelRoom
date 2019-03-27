@@ -50,20 +50,10 @@
                 <nav class="drawer-main">
                     <ul class="nav nav-drawer">
 
-                        <li class="nav-item nav-drawer-header">Apps</li>
-
-                        <li class="nav-item">
-                            <a href="index.html"><i class="ion-ios-speedometer-outline"></i> Dashboard</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="frontend_home.html"><i class="ion-ios-monitor-outline"></i> Frontend</a>
-                        </li>
-
-                        <li class="nav-item nav-drawer-header">Components</li>
+                        <li class="nav-item nav-drawer-header">Application</li>
 
                         <li class="nav-item nav-item-has-subnav active open">
-                            <a href="javascript:void(0)"><i class="ion-ios-browsers-outline"></i> Réservation</a>
+                            <a href="javascript:void(0)"><i class="ion-ios-browsers"></i> Réservation</a>
                             <ul class="nav nav-subnav">
                                 <li class="active">
                                     <a href="{{url('reservation/reserver')}}">Réserver</a>
@@ -74,10 +64,19 @@
                             </ul>
                         </li>
                         <li class="nav-item nav-item-has-subnav active open">
-                            <a href="javascript:void(0)"><i class="ion-ios-browsers-outline"></i> Chambres</a>
+                            <a href="javascript:void(0)"><i class="fa fa-plus-square"></i> Chambres</a>
                             <ul class="nav nav-subnav">
                                 <li class="active">
                                     <a href="{{url('gestionChambres')}}">Gestion chambres</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item nav-item-has-subnav active open">
+                            <a href="javascript:void(1)"><i class="ion-settings"></i> Parametre</a>
+                            <ul class="nav nav-subnav">
+                                <li>
+                                    <a href="{{url('parametre')}}">Parametre</a>
                                 </li>
 
                             </ul>
