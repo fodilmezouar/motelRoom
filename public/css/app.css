@@ -102,11 +102,11 @@ Author: rustheme
 
 .nav-drawer > .active > a {
 	background-color: transparent;
-	border-color: #7dc855;
+	border-color: #006368;
 }
 
 .nav-drawer > .active > a:hover, .nav-drawer > .active > a:focus, .nav-drawer > .active > a:active {
-	border-color: #7dc855;
+	border-color: #006368;
 }
 
 /* Nav icon */
@@ -466,7 +466,7 @@ Author: rustheme
 
 .form-material > .form-control:focus {
 	background-color: transparent;
-	box-shadow: 0 2px 0 #7dc855;
+	box-shadow: 0 2px 0 #006368;
 }
 
 .form-material > .form-control:focus + label {
@@ -474,7 +474,7 @@ Author: rustheme
 }
 
 .form-material > .form-control:focus ~ .input-group-addon {
-	box-shadow: 0 2px 0 #7dc855;
+	box-shadow: 0 2px 0 #006368;
 }
 
 .form-material > .form-control:focus + label,
@@ -787,8 +787,8 @@ Author: rustheme
 }
 
 .css-checkbox-primary input:checked + span {
-	background-color: #7dc855;
-	border-color: #7dc855;
+	background-color: #006368;
+	border-color: #006368;
 }
 
 .css-checkbox-info input:checked + span {
@@ -869,7 +869,7 @@ Author: rustheme
 }
 
 .css-radio-primary input:checked + span:after {
-	background-color: #7dc855;
+	background-color: #006368;
 }
 
 .css-radio-info input:checked + span:after {
@@ -970,7 +970,7 @@ Author: rustheme
 }
 
 .switch-primary input:checked + span {
-	background-color: #7dc855;
+	background-color: #006368;
 }
 
 .switch-info input:checked + span {
@@ -990,11 +990,11 @@ Author: rustheme
 }
 
 .switch-app input:checked + span {
-	background-color: #7dc855;
+	background-color: #006368;
 }
 
 .switch-green input:checked + span {
-	background-color: #7dc855;
+	background-color: #006368;
 }
 
 .switch-blue input:checked + span {
@@ -1482,14 +1482,14 @@ a.card:not(.bg-inverse):hover {
 }
 
 .card > .nav-tabs > li > a:hover {
-	color: #7dc855;
+	color: #006368;
 	background-color: transparent;
 	border-color: transparent;
 }
 
 .card > .nav-tabs > li.active > a, .card > .nav-tabs > li.active > a:hover, .card > .nav-tabs > li.active > a:focus {
 	background-color: #fff;
-	box-shadow: inset 0 2px #7dc855;
+	box-shadow: inset 0 2px #006368;
 }
 
 .card > .nav-tabs > li.active > a:hover, .card > .nav-tabs > li.active > a:focus {
@@ -1528,15 +1528,15 @@ a.card:not(.bg-inverse):hover {
 }
 
 .card > .nav-tabs.nav-tabs-alt > li > a:hover {
-	box-shadow: inset 0 -2px #7dc855;
+	box-shadow: inset 0 -2px #006368;
 }
 
 .card > .nav-tabs.nav-tabs-alt > li.active > a, .card > .nav-tabs.nav-tabs-alt > li.active > a:hover, .card > .nav-tabs.nav-tabs-alt > li.active > a:focus {
-	box-shadow: inset 0 -2px #7dc855;
+	box-shadow: inset 0 -2px #006368;
 }
 
 .card > .nav-tabs.nav-stacked > li.active > a, .card > .nav-tabs.nav-stacked > li.active > a:hover, .card > .nav-tabs.nav-stacked > li.active > a:focus {
-	box-shadow: inset -2px 0 #7dc855;
+	box-shadow: inset -2px 0 #006368;
 }
 
 .card .card-block.tab-content {
@@ -2478,11 +2478,11 @@ pre.pre-sh {
 
 .dropzone:hover {
 	background-color: #f9f9f9;
-	border-color: #7dc855;
+	border-color: #006368;
 }
 
 .dropzone:hover .dz-message {
-	color: #7dc855;
+	color: #006368;
 }
 
 /* Bootstrap Datepicker */
@@ -2599,8 +2599,8 @@ fieldset[disabled] .datepicker table tr td.selected.highlighted.active {
 
 .datepicker table tr td.active, .datepicker table tr td.active.highlighted {
 	color: #fff;
-	background-color: #7dc855;
-	border-color: #7dc855;
+	background-color: #006368;
+	border-color: #006368;
 	text-shadow: none;
 }
 
@@ -2631,19 +2631,19 @@ fieldset[disabled] .datepicker table tr td.active.highlighted:focus,
 fieldset[disabled] .datepicker table tr td.active.highlighted.focus,
 fieldset[disabled] .datepicker table tr td.active.highlighted:active,
 fieldset[disabled] .datepicker table tr td.active.highlighted.active {
-	background-color: #7dc855;
-	border-color: #7dc855;
+	background-color: #006368;
+	border-color: #006368;
 }
 
 .datepicker table tr td.active .badge, .datepicker table tr td.active.highlighted .badge {
-	color: #7dc855;
+	color: #006368;
 	background-color: #fff;
 }
 
 .datepicker table tr td.active:hover, .datepicker table tr td.active.highlighted:hover {
 	color: #fff;
-	background-color: #7dc855;
-	border-color: #7dc855;
+	background-color: #006368;
+	border-color: #006368;
 }
 
 .datepicker table tr td.active:hover:hover, .datepicker table tr td.active:hover:focus, .datepicker table tr td.active:hover.focus, .datepicker table tr td.active:hover:active, .datepicker table tr td.active:hover.active,
@@ -2673,12 +2673,12 @@ fieldset[disabled] .datepicker table tr td.active.highlighted:hover:focus,
 fieldset[disabled] .datepicker table tr td.active.highlighted:hover.focus,
 fieldset[disabled] .datepicker table tr td.active.highlighted:hover:active,
 fieldset[disabled] .datepicker table tr td.active.highlighted:hover.active {
-	background-color: #7dc855;
-	border-color: #7dc855;
+	background-color: #006368;
+	border-color: #006368;
 }
 
 .datepicker table tr td.active:hover .badge, .datepicker table tr td.active.highlighted:hover .badge {
-	color: #7dc855;
+	color: #006368;
 	background-color: #fff;
 }
 
@@ -2819,7 +2819,7 @@ div.tagsinput span.tag a:hover {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-	background-color: #7dc855;
+	background-color: #006368;
 }
 
 .select2-container--default .select2-search--inline .select2-search__field {
@@ -2869,7 +2869,7 @@ div.tagsinput span.tag a:hover {
 }
 
 .slick-dots li.slick-active button:before {
-	color: #7dc855;
+	color: #006368;
 }
 
 /* jQuery Sparkline */
@@ -2928,12 +2928,12 @@ div.tagsinput span.tag a:hover {
 }
 .panel > .panel-heading {
 	background-image: none;
-	background-color: #7dc855;
+	background-color: #006368;
 	color: white;
 
 }
 .panel-primary{
-	border-color: #7dc855;
+	border-color: #006368;
 }
 
 

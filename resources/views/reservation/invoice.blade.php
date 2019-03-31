@@ -44,21 +44,22 @@
             @page { margin: 0; }
         }
     </style>
-    <div class="card" id="card" >
+    <div class="card" id="card" data-show-print="true">
 
-        <button class="btn btn-app-blue hidden-print center-block mx-md-0" type="button" onclick="window.print();"><i class="ion-printer m-r-xs"></i> Print Invoice</button>
+        <button class="btn btn-app hidden-print center-block mx-md-0" type="button" onclick="window.print();"><i class="ion-printer m-r-xs"></i> Print Invoice</button>
 
         <div class="card-header" style="border: 1px solid">
-            <div id="logo" class="drawer-header">
+            <div id="logo" class="drawer">
                 <img class="img-responsive" src="{{asset($parametre->logo)}}" width="100px"  />
             </div>
             <div class="h3 text-uppercase text-center">{{ strtoupper($parametre->nom) }}</div>
-        </div>
-        <div class="card-block  pull-right">
-            <address>
+            <address class="pull-right">
                 {{$parametre->adresse}}<br>
                 <i class="ion-ios-telephone-outline"></i>{{$parametre->numtel}}
             </address>
+        </div>
+        <div class="card-block  pull-right">
+
         </div>
         <div class="card-block pull-center">
             <!-- Invoice Info -->
@@ -69,46 +70,50 @@
     @foreach($responsable as $res)
         <!-- End Invoice Info -->
         <div class="container card-block">
-        <div class="table-responsive container text-sm-center" style="border: 1px solid">
-            <table class="table table-condensed table-borderless">
+            <div class="row" >
+                <div class="col-sm-6">
+                    <div class="table-responsive container text-sm-center" style="border: 1px solid">
+                        <table class="table table-condensed table-borderless" data-toggle="table" data-show-print="true" width="50%"
+                               data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/">
 
-                <tr>
-                    <td>Nom</td><td>{{$res->nom}}</td><td>:الاسم</td>
-                </tr>
-                <tr>
-                    <td>Prénom</td><td>{{$res->prenom}}</td><td>:اللقب</td>
-                </tr>
-                <tr>
-                    <td>Fils de</td><td>{{$res->pere}}</td><td>:ابن</td>
-                </tr>
-                <tr>
-                    <td>et de</td><td>{{$res->mere}}</td><td>:وابن</td>
-                </tr>
-                <tr>
-                    <td>Date de Naissance</td><td>{{$res->naissance}}</td><td>:تاريخ الازدياد</td>
-                </tr>
-                <tr>
-                    <td>Lieu de Naissance</td><td>{{$res->lieu}}</td><td>مكان الازدياد</td>
-                </tr>
-                <tr>
-                    <td>Profession</td><td>{{$res->job}}</td><td>:المهنة</td>
-                </tr>
-                <tr>
-                    <td>adresse</td><td>{{$res->adresse}}</td><td>:العنوان</td>
-                </tr>
-                <tr>
-                    <td>Nationalité</td><td class="border-success">{{$res->nationalite}}</td><td>:الجنسية</td>
-                </tr>
-            </table>
-        </div>
-            <hr class="hidden-print">
-            <div class="h7  text-sm-center text-danger">Nombre d'enfants de moins de 15 ans : <strong>3</strong></div>
+                            <tr>
+                                <td>Nom</td><td>{{$res->nom}}</td><td>:الاسم</td>
+                            </tr>
+                            <tr>
+                                <td>Prénom</td><td>{{$res->prenom}}</td><td>:اللقب</td>
+                            </tr>
+                            <tr>
+                                <td>Fils de</td><td>{{$res->pere}}</td><td>:ابن</td>
+                            </tr>
+                            <tr>
+                                <td>et de</td><td>{{$res->mere}}</td><td>:وابن</td>
+                            </tr>
+                            <tr>
+                                <td>Date de Naissance</td><td>{{$res->naissance}}</td><td>:تاريخ الازدياد</td>
+                            </tr>
+                            <tr>
+                                <td>Lieu de Naissance</td><td>{{$res->lieu}}</td><td>مكان الازدياد</td>
+                            </tr>
+                            <tr>
+                                <td>Profession</td><td>{{$res->job}}</td><td>:المهنة</td>
+                            </tr>
+                            <tr>
+                                <td>adresse</td><td>{{$res->adresse}}</td><td>:العنوان</td>
+                            </tr>
+                            <tr>
+                                <td>Nationalité</td><td class="border-success">{{$res->nationalite}}</td><td>:الجنسية</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            <div class="col-sm-6">
             <div class="h4 text-uppercase text-center text-blue">بطاقة التعريف المقدمة</div>
             <div class="h4 text-uppercase text-center text-blue">Piece d'identité </div>
             <div class="table-responsive container text-sm-center" style="border: 1px solid">
                 <?php
 
                     $dateRese = date('Y-m-d', strtotime($reservation->date_reservation));
+                    $TimeRese = date('H:i:s', strtotime($reservation->created_at));
                     $dateSortie = date('Y-m-d', strtotime($reservation->date_liberation));
                     $earlier = new DateTime($dateRese);
                     $later = new DateTime($dateSortie);
@@ -122,7 +127,8 @@
                     $type="Passport";
 
                 ?>
-                <table class="table table-condensed table-borderless" >
+                <table  class="table table-condensed table-borderless" data-toggle="table" data-show-print="true" width="50%"
+                        data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/" >
                     <tr>
                         <td>Nature</td><td>{{$type}}</td><td>:النوع</td>
                     </tr>
@@ -136,7 +142,7 @@
                         <td>A</td><td>{{$res->lieu}}</td><td>: ب</td>
                     </tr>
                     <tr>
-                        <td>Arrivée</td><td>{{$dateRese}}</td><td>:الوصول</td>
+                        <td>Arrivée</td><td>{{$dateRese}} a {{$TimeRese}}</td><td>:الوصول</td>
                     </tr>
                     <tr>
                         <td>Durée du séjour</td><td>{{$diff}}</td><td>: مدة الاقامة</td>
@@ -146,6 +152,13 @@
                     </tr>
                 </table>
             </div>
+            </div>
+        </div>
+
+            <hr class="hidden-print">
+            <div class="h7  text-sm-center text-danger">Nombre d'enfants de moins de 15 ans : <strong>3</strong></div>
+
+    </div>
 
                 <div class="card-block pull-right">الامضاء</div>
                 <div class="card-block pull-left">signature</div>

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<?php
+    $logo = \App\Parametre::find(1)->logo;
 
+
+?>
 <html class="app-ui">
 
 <head>
@@ -43,7 +47,7 @@
             <div class="app-layout-drawer-scroll">
                 <!-- Drawer logo -->
                 <div id="logo" class="drawer-header">
-                    <a href="index.html"><img class="img-responsive" src="{{asset('img/logo/logo-backend.png')}}" title="AppUI" alt="AppUI" /></a>
+                    <a href="index.html"><img class="img" src="{{asset($logo)}}" title="AppUI" alt="AppUI" /></a>
                 </div>
 
                 <!-- Drawer navigation -->
