@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
 Route::get('/', 'ReserverController@reservation');
 Route::get('test', function () {
     return view('reservation.invoice');
@@ -37,7 +35,9 @@ Route::get('/reservation/storeReservation','ReserverController@store');
 Route::post('/reservation/liberer','ReserverController@liberer');
 Route::post('/reservation/payer','ReserverController@payer');
 
-//
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('parametre','ParametreController@create');
 Route::post('parametre','ParametreController@store');
+
+
