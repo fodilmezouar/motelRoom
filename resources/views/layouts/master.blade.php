@@ -47,7 +47,7 @@
             <div class="app-layout-drawer-scroll">
                 <!-- Drawer logo -->
                 <div id="logo" class="drawer-header">
-                    <a href="index.html"><img class="img" src="{{asset($logo)}}" title="AppUI" alt="AppUI" /></a>
+                    <a><img class="img" src="{{asset($logo)}}" title="AppUI" alt="AppUI" /></a>
                 </div>
 
                 <!-- Drawer navigation -->
