@@ -156,12 +156,11 @@
         </div>
 
             <hr class="hidden-print">
-            <div class="h7  text-sm-center text-danger">Nombre d'enfants de moins de 15 ans : <strong>3</strong></div>
+            <div class="h7  text-sm-center text-danger">Nombre d'enfants : <strong>{{$nombre}}</strong></div>
 
     </div>
+    <center><div class="text-lg-center">signature</div></center>
 
-                <div class="card-block pull-right">الامضاء</div>
-                <div class="card-block pull-left">signature</div>
         </div>
     @endforeach
 

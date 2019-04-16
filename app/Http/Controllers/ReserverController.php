@@ -133,8 +133,13 @@ class ReserverController extends Controller
         $idChambre = Chambre_state::where('reservation_id','=',$id)->get()->first()->chambre_id;
         $chambre = Chambres::find($idChambre);
         $parametre =Parametre::find(1);
-
-        return view('reservation.invoice')->with(['responsable'=>$responsable,'reservation'=>$reservation,'parametre'=>$parametre,'chambre'=>$chambre]);
+        $nombreEnfant = DB::table('clients')
+            ->join('chambre_states', 'clients.id', '=', 'chambre_states.client_id')
+            ->select(DB::raw('count(clients.id) as count'))
+            ->where('reservation_id', "=", $id)
+            ->where('type','=',3)
+            ->get();
+        return view('reservation.invoice')->with(['responsable'=>$responsable,'reservation'=>$reservation,'parametre'=>$parametre,'chambre'=>$chambre,'nombre'=>$nombreEnfant[0]->count]);
 
 
 
