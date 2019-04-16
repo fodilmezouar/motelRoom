@@ -13,6 +13,10 @@
 
 Route::get('/', function () {
     return view('welcome');
+Route::get('/', 'ReserverController@reservation');
+Route::get('test', function () {
+    return view('reservation.invoice');
+
 });
 
 Route::get('/gestionChambres', function () {
