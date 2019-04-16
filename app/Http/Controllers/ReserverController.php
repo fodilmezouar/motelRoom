@@ -13,6 +13,14 @@ class ReserverController extends Controller
 {
     public function reservation(){
     	//state 1 pour occupé , 0 pour libre
+        $parametre = Parametre::all();
+        if ($parametre->isEmpty()){
+           $para = new Parametre();
+           $para->nom = "Residence Kezadri";
+           $para->facebook = "Kezadri";
+           $para->numtel = "0770537961";
+           $para->save();
+        }
     	$rooms = Chambres::all();
       $clients = Client::all();
         return view('reservation.reserver')->with(['rooms'=>$rooms,'clients'=>$clients]);

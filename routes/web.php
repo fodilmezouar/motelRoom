@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', 'ReserverController@reservation');
 Route::get('test', function () {
     return view('reservation.invoice');
 });

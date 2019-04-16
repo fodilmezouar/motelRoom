@@ -40,7 +40,7 @@ class ParametreController extends Controller
         $labo->lienMap = $request->input('map');
         $labo->save();
 
-        return redirect('dashboard');
+        return redirect('/');
 
     }
 }
