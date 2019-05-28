@@ -7,9 +7,9 @@
           $('.lio').removeClass('active');
           $(this).addClass('active');
      });
-       
-        
-     
+
+
+     $('#tableData').dataTable();
      function calcDuree(){
         var duree = parseInt($('#duree').val());
         if(!duree)

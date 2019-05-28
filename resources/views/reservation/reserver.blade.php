@@ -241,7 +241,7 @@
                                     <!-- Card Tabs Default Style -->
                                 <div class="card">
                                     <div class="card-block">
-                                         <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                         <table class="table table-bordered table-striped table-vcenter js-dataTable-full" id="tableData">
                                     <thead>
                                         <tr>
                                             <th>Nom</th>
